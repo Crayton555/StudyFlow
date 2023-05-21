@@ -12,7 +12,7 @@ using StudyFlow.Data;
 namespace StudyFlow.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230520170648_UpdatedModels2")]
+    [Migration("20230521205115_UpdatedModels2")]
     partial class UpdatedModels2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

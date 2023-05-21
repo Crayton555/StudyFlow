@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using StudyFlow.Data;
 using StudyFlow.Models.Domain;
 
@@ -22,9 +25,26 @@ namespace StudyFlow.Controllers
         // GET: Tasks
         public async Task<IActionResult> Index()
         {
-              return _context.Tasks != null ? 
-                          View(await _context.Tasks.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Tasks'  is null.");
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+                return RedirectToAction("Register", "Account");
+
+            var loggedInUser = await _context.Users
+                .Where(z => z.Id == userId)
+                .Include(z => z.Tasks)
+                .FirstOrDefaultAsync();
+
+            var tasks = loggedInUser.Tasks.ToList();
+
+            return tasks != null ?
+                         View(tasks) :
+                         Problem("Entity set 'ApplicationDbContext.Tasks'  is null.");
+
+
+            /*return _context.Tasks != null ?
+                        View(await _context.Tasks.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Tasks'  is null.");*/
         }
 
         // GET: Tasks/Details/5
@@ -61,6 +81,21 @@ namespace StudyFlow.Controllers
             if (ModelState.IsValid)
             {
                 task.Id = Guid.NewGuid();
+
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                var loggedInUser = await _context.Users
+                    .Where(z => z.Id == userId)
+                    .Include(z => z.Tasks)
+                    .FirstOrDefaultAsync();
+
+                loggedInUser.Tasks.Add(task);
+
+
+                _context.Update(loggedInUser);
+
+                task.User = loggedInUser;
+
                 _context.Add(task);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -151,14 +186,14 @@ namespace StudyFlow.Controllers
             {
                 _context.Tasks.Remove(task);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TaskExists(Guid id)
         {
-          return (_context.Tasks?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Tasks?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

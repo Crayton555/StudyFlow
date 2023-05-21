@@ -4,6 +4,7 @@ using StudyFlow.Models.Identity;
 using StudyFlow.Models.Domain;
 using StudyFlow.Models.Domain.Enumeration;
 using System.Reflection.Emit;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace StudyFlow.Data
 {
@@ -31,6 +32,14 @@ namespace StudyFlow.Data
             builder.Entity<Models.Domain.Task>()
                 .Property(t => t.Status)
                 .HasConversion<string>();
+
+            builder.Entity<StudyFlowUser>()
+                .HasMany(c => c.Tasks)
+                .WithOne(e => e.User);
+
+            builder.Entity<Models.Domain.Task>()
+                .HasOne(e => e.User)
+                .WithMany(c => c.Tasks);
         }
     }
 }
