@@ -28,7 +28,7 @@ namespace StudyFlow.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (userId == null)
-                return RedirectToAction("Register", "Account");
+                return RedirectToAction("Index", "Home");
 
             var loggedInUser = await _context.Users
                 .Where(z => z.Id == userId)
