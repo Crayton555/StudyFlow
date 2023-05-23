@@ -5,6 +5,7 @@ using StudyFlow.Models.Domain;
 using StudyFlow.Models.Domain.Enumeration;
 using System.Reflection.Emit;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using StudyFlow.Models;
 
 namespace StudyFlow.Data
 {
@@ -41,5 +42,7 @@ namespace StudyFlow.Data
                 .HasOne(e => e.User)
                 .WithMany(c => c.Tasks);
         }
+
+        public DbSet<StudyFlow.Models.Calendar>? Calendar { get; set; }
     }
 }
