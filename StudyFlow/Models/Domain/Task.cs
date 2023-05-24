@@ -17,11 +17,39 @@ namespace StudyFlow.Models.Domain
         [Required]
         public Status? Status { get; set; }
         [Required]
-        /*[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm tt}")]*/
         public DateTime CreatedAt { get; set; }
         [Required]
-        /*[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm tt}")]*/
+        [AfterDate("CreatedAt", ErrorMessage = "Due Date must be after Created At.")]
         public DateTime DueDate { get; set; }
         public StudyFlowUser? User { get; set; }
+    }
+
+    public class AfterDateAttribute : ValidationAttribute
+    {
+        private readonly string _compareToPropertyName;
+
+        public AfterDateAttribute(string compareToPropertyName)
+        {
+            _compareToPropertyName = compareToPropertyName;
+        }
+
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        {
+            var property = validationContext.ObjectType.GetProperty(_compareToPropertyName);
+
+            if (property == null)
+            {
+                return new ValidationResult($"Property {_compareToPropertyName} not found.");
+            }
+
+            var compareToValue = property.GetValue(validationContext.ObjectInstance);
+
+            if (compareToValue == null || value == null || (DateTime)value > (DateTime)compareToValue)
+            {
+                return ValidationResult.Success;
+            }
+
+            return new ValidationResult(ErrorMessage);
+        }
     }
 }

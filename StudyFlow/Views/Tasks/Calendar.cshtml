@@ -1,0 +1,48 @@
+﻿@model List<StudyFlow.Models.Domain.Task>
+
+@{
+    ViewData["Title"] = "Calendar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Calendar</h1>
+
+<div id="calendar"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css" rel="stylesheet" />
+
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+<script type="text/javascript">
+    var js = jQuery.noConflict(true);
+    js(function () {
+        js('#calendar').fullCalendar({
+            defaultView: 'month',
+            editable: false,
+            eventStartEditable: false,
+            eventDurationEditable: false,
+            eventOverlap: false,
+            events: [
+    @foreach (var task in Model)
+    {
+        <text>
+                    {
+                        title: '@task.Title' + " Created At",
+                        start: '@task.CreatedAt.ToString("yyyy-MM-dd")'
+                    },
+                    {
+                        title: '@task.Title' + " Due Date",
+                        start: '@task.DueDate.ToString("yyyy-MM-dd")'
+                    },
+        </text>
+    }
+                            ]
+        });
+    });
+</script>
