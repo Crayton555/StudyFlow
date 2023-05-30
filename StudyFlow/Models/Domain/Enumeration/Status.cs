@@ -4,6 +4,6 @@
     {
         Completed,
         InProgress,
-        Overdue
+        ToDo
     }
 }

@@ -5,54 +5,149 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Task</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Priority)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Priority)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DueDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DueDate)
-        </dd>
-    </dl>
+
+<div class="container justify-content-center mt-5">
+
+    <div class="row ">
+
+        <div class="col-md-3">
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="row mb-2">
+
+                <div class="text-center">
+                    <h1>Delete task</h1>
+                    <h4>Are you sure you want to delete this task?</h4>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div>
+                    <div class="box p-3 mb-3">
+                        <div>
+                            <span class="badge badge-pill bg-low">Priority: @Html.DisplayFor(model => model.Priority)</span>
+                        </div>
+                        <div>
+                            <span class="font-weight-bold">Title: @Html.DisplayFor(model => model.Title)</span>
+                        </div>
+                        <div>
+                            <span>Description: @Html.DisplayFor(model => model.Description)</span>
+                        </div>
+
+                        <div>
+                            <span class="text-grey">Due date: @Html.DisplayFor(model => model.DueDate)</span>
+                        </div>
+                        <div>
+
+                            <span class="text-grey">Date created: @Html.DisplayFor(model => model.CreatedAt)</span>
+                        </div>
+                        <div>
+
+                            <p class="text-light font-weight-bold">Status: @Html.DisplayFor(model => model.Status)</p>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="Id" />
+                                <input type="submit" value="Delete task" class="btn btn-danger" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+        </div>
+
+    </div>
+
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+
+
 </div>
+
+
+<style>
+    body {
+        background-color: black !important;
+        color: white !important;
+    }
+
+    .input {
+        margin-top: 1%;
+        color: gray;
+        background-color: transparent;
+        border-radius: 15px;
+        border: 1px solid gray;
+        padding: 12px 12px 12px 20px;
+        width: 100%;
+    }
+
+    .check {
+        background-color: transparent;
+    }
+
+    .text-purple {
+        color: #29208D !important;
+    }
+
+    .text-grey {
+        color: dimgray;
+    }
+
+    .bg-purple {
+        background-color: #29208D !important;
+    }
+
+    .box {
+        border: 1px solid grey;
+        border-radius: 5px;
+    }
+
+    .bg-low {
+        background-color: lightgreen;
+        color: black;
+    }
+
+    .bg-medium {
+        background-color: coral;
+        color: black;
+    }
+
+    .bg-high {
+        background-color: #BA110C;
+        color: black;
+    }
+
+    .bg-mobile {
+        background-color: deeppink;
+    }
+
+    .bg-web {
+        background-color: purple;
+    }
+
+    .bg-red {
+        background-color: #BA110C;
+    }
+</style>
+
+
+
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">

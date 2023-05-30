@@ -46,6 +46,27 @@ namespace StudyFlow.Controllers
                         View(await _context.Tasks.ToListAsync()) :
                         Problem("Entity set 'ApplicationDbContext.Tasks'  is null.");*/
         }
+        
+        public async Task<IActionResult> Dashboard()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+                return RedirectToAction("Index", "Home");
+
+
+
+            var loggedInUser = await _context.Users
+                .Where(z => z.Id == userId)
+                .Include(z => z.Tasks)
+                .FirstOrDefaultAsync();
+
+            var tasks = loggedInUser.Tasks.ToList();
+
+            return tasks != null ?
+                         View(tasks) :
+                         Problem("Entity set 'ApplicationDbContext.Tasks'  is null.");
+        }
 
         public async Task<IActionResult> Calendar()
         {

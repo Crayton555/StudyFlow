@@ -5,9 +5,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Calendar</h1>
+
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <h1>Calendar</h1>
+        </div>
+        <div class="col-md-6 text-right">
+        <a asp-action="Create" class="btn bg-purple text-light">+ Add Task</a>
+        </div>
+    </div>
+
+
+
 
 <div id="calendar"></div>
+
+
+<style>
+    .bg-purple {
+        background-color: #29208D !important;
+    }
+</style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

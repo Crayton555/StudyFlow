@@ -6,55 +6,138 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
 
-<h4>Task</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+
+
+<div class="container justify-content-center mt-5">
+
+    <div class="row ">
+        <div class="col-md-3">
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="row mb-2">
+
+                <div class="text-center">
+                    <h1>Edit task</h1>
+                </div>
+
+
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+
+                            <label asp-for="Title" class="control-label"></label>
+                            <input asp-for="Title" class="input" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <input asp-for="Description" class="input" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Priority" class="control-label"></label>
+                            <select asp-for="Priority" class="input" asp-items="Html.GetEnumSelectList<Priority>()"></select>
+                            <span asp-validation-for="Priority" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Status" class="control-label"></label>
+                            <select asp-for="Status" class="input" asp-items="Html.GetEnumSelectList<Status>()"></select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CreatedAt" class="control-label"></label>
+                            <input asp-for="CreatedAt" class="form-control" />
+                            <span asp-validation-for="CreatedAt" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DueDate" class="control-label"></label>
+                            <input asp-for="DueDate" class="form-control" />
+                            <span asp-validation-for="DueDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 text-left">
+                                    <input type="submit" value="Back" class="btn btn-secondary" />
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <input type="submit" value="Save changes" class="btn btn-success" />
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </form>
+
+                </div>
+                <div class="col-md-6">
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Priority" class="control-label"></label>
-                <select asp-for="Priority" class="form-control" asp-items="Html.GetEnumSelectList<Priority>()"></select>
-                <span asp-validation-for="Priority" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<Status>()"></select>
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DueDate" class="control-label"></label>
-                <input asp-for="DueDate" class="form-control" />
-                <span asp-validation-for="DueDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+
+        </div>
+
+        <div class="col-md-3">
+        </div>
     </div>
+    
+
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+<style>
+
+    .input-date{
+        color: gray;
+        background-color: transparent;
+        border-radius: 15px;
+    }
+
+    body {
+        background-color: black !important;
+        color: white !important;
+    }
+
+    .input {
+        margin-top: 1%;
+        color: gray; 
+        background-color: transparent;
+        border-radius: 15px;
+        border: 1px solid gray;
+        padding: 12px 12px 12px 20px;
+        width: 100%;
+    }
+
+    .check {
+        background-color: transparent;
+    }
+
+    .text-purple {
+        color: #29208D !important;
+    }
+
+    .text-grey {
+        color: dimgray;
+    }
+
+    .bg-purple {
+        background-color: #29208D !important;
+    }
+</style>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -1,0 +1,115 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+
+
+<div class="container justify-content-center mt-5">
+
+    <div class="row">
+        <div class="col-md-4 m-auto"></div>
+
+
+        <div class="col-md-4 m-auto">
+            <img src="~/resources/login.png" width="350" />
+            <p class="pt-1 pb-1 mb-1">Sign in</p>
+
+            <form id ="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group pt-1 pb-1 mb-1">
+                    <div class="pt-1 pb-1">
+
+                        <input asp-for="Input.Email" autocomplete="username" aria-required="true" type="text" placeholder="Email" class="input" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group pt-1 pb-1 mb-1">
+
+                    <div class="pt-1 pb-1">
+
+                        <input asp-for="Input.Password" autocomplete="current-password" aria-required="true" type="password" placeholder="Password" class="input" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="checkbox">
+
+                        <label asp-for="Input.RememberMe" class="text-grey">
+                            <input asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row mt-5">
+                        <div class="col-sm-6 text-left">
+                            <a id="forgot-password" asp-page="./ForgotPassword" class="text-purple">Forgot password?</a>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <button id="login-submit" type="submit" class="btn bg-purple text-light pl-3 pr-3">LOG IN</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 mt-5">
+                            <p class="text-grey">Don't have an account? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-purple">Sign up</a></p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+
+
+        <div class="col-md-4 m-auto"></div>
+    </div>
+
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+<style>
+    body {
+        background-color: black !important;
+        color: white !important;
+    }
+
+    .input {
+        margin-top: 1%;
+        color: gray;
+        background-color: transparent;
+        border-radius: 15px;
+        border: 1px solid gray;
+        padding: 12px 12px 12px 20px;
+        width: 100%;
+    }
+
+    .check {
+        background-color: transparent;
+    }
+
+    .text-purple {
+        color: #29208D !important;
+    }
+
+    .text-grey {
+        color: dimgray;
+    }
+
+    .bg-purple {
+        background-color: #29208D !important;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
