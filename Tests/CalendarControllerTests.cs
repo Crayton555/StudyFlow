@@ -49,11 +49,11 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Index() as ViewResult;
 
             // Assert
-            Assert.NotNull(result);
+            NUnit.Framework.Assert.NotNull(result);
             var model = result.Model as Calendar[];
-            Assert.NotNull(model);
-            Assert.AreEqual(1, model.Length);
-            Assert.AreEqual(calendar.Id, model[0].Id);
+            NUnit.Framework.Assert.NotNull(model);
+            NUnit.Framework.Assert.AreEqual(1, model.Length);
+            NUnit.Framework.Assert.AreEqual(calendar.Id, model[0].Id);
         }
 
         [Test]
@@ -66,9 +66,9 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Index() as ObjectResult;
 
             // Assert
-            Assert.NotNull(result);
-            Assert.AreEqual(500, result.StatusCode);
-            Assert.AreEqual("Entity set 'ApplicationDbContext.Class'  is null.", result.Value);
+            NUnit.Framework.Assert.NotNull(result);
+            NUnit.Framework.Assert.AreEqual(500, result.StatusCode);
+            NUnit.Framework.Assert.AreEqual("Entity set 'ApplicationDbContext.Class'  is null.", result.Value);
         }
 
         [Test]
@@ -84,10 +84,10 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Details(calendarId) as ViewResult;
 
             // Assert
-            Assert.NotNull(result);
+            NUnit.Framework.Assert.NotNull(result);
             var model = result.Model as Calendar;
-            Assert.NotNull(model);
-            Assert.AreEqual(calendarId, model.Id);
+            NUnit.Framework.Assert.NotNull(model);
+            NUnit.Framework.Assert.AreEqual(calendarId, model.Id);
         }
 
         [Test]
@@ -97,7 +97,7 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Details(null);
 
             // Assert
-            Assert.IsInstanceOf<NotFoundResult>(result);
+            NUnit.Framework.Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
         [Test]
@@ -114,7 +114,7 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Details(invalidId);
 
             // Assert
-            Assert.IsInstanceOf<NotFoundResult>(result);
+            NUnit.Framework.Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
         [Test]
@@ -127,12 +127,12 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Create(calendar) as RedirectToActionResult;
 
             // Assert
-            Assert.NotNull(result);
-            Assert.AreEqual("Index", result.ActionName);
+            NUnit.Framework.Assert.NotNull(result);
+            NUnit.Framework.Assert.AreEqual("Index", result.ActionName);
 
             var createdCalendar = await _dbContext.Calendar.FindAsync(calendar.Id);
-            Assert.NotNull(createdCalendar);
-            Assert.AreEqual(calendar.Id, createdCalendar.Id);
+            NUnit.Framework.Assert.NotNull(createdCalendar);
+            NUnit.Framework.Assert.AreEqual(calendar.Id, createdCalendar.Id);
         }
 
         [Test]
@@ -146,10 +146,10 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Create(calendar) as ViewResult;
 
             // Assert
-            Assert.NotNull(result);
+            NUnit.Framework.Assert.NotNull(result);
             var model = result.Model as Calendar;
-            Assert.NotNull(model);
-            Assert.AreEqual(calendar.Id, model.Id);
+            NUnit.Framework.Assert.NotNull(model);
+            NUnit.Framework.Assert.AreEqual(calendar.Id, model.Id);
         }
 
         [Test]
@@ -165,10 +165,10 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Edit(calendarId) as ViewResult;
 
             // Assert
-            Assert.NotNull(result);
+            NUnit.Framework.Assert.NotNull(result);
             var model = result.Model as Calendar;
-            Assert.NotNull(model);
-            Assert.AreEqual(calendarId, model.Id);
+            NUnit.Framework.Assert.NotNull(model);
+            NUnit.Framework.Assert.AreEqual(calendarId, model.Id);
         }
 
         [Test]
@@ -178,7 +178,7 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Edit(null);
 
             // Assert
-            Assert.IsInstanceOf<NotFoundResult>(result);
+            NUnit.Framework.Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
         [Test]
@@ -195,7 +195,7 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Edit(invalidId);
 
             // Assert
-            Assert.IsInstanceOf<NotFoundResult>(result);
+            NUnit.Framework.Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
         [Test]
@@ -211,12 +211,12 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Edit(calendarId, calendar) as RedirectToActionResult;
 
             // Assert
-            Assert.NotNull(result);
-            Assert.AreEqual("Index", result.ActionName);
+            NUnit.Framework.Assert.NotNull(result);
+            NUnit.Framework.Assert.AreEqual("Index", result.ActionName);
 
             var updatedCalendar = await _dbContext.Calendar.FindAsync(calendarId);
-            Assert.NotNull(updatedCalendar);
-            Assert.AreEqual(calendar.Title, updatedCalendar.Title);
+            NUnit.Framework.Assert.NotNull(updatedCalendar);
+            NUnit.Framework.Assert.AreEqual(calendar.Title, updatedCalendar.Title);
         }
 
         [Test]
@@ -234,7 +234,7 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Edit(invalidId, calendar);
 
             // Assert
-            Assert.IsInstanceOf<NotFoundResult>(result);
+            NUnit.Framework.Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
         [Test]
@@ -253,10 +253,10 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Edit(calendarId, updatedCalendar) as ViewResult;
 
             // Assert
-            Assert.NotNull(result);
+            NUnit.Framework.Assert.NotNull(result);
             var model = result.Model as Calendar;
-            Assert.NotNull(model);
-            Assert.AreEqual(calendarId, model.Id);
+            NUnit.Framework.Assert.NotNull(model);
+            NUnit.Framework.Assert.AreEqual(calendarId, model.Id);
         }
 
         [Test]
@@ -272,10 +272,10 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Delete(calendarId) as ViewResult;
 
             // Assert
-            Assert.NotNull(result);
+            NUnit.Framework.Assert.NotNull(result);
             var model = result.Model as Calendar;
-            Assert.NotNull(model);
-            Assert.AreEqual(calendarId, model.Id);
+            NUnit.Framework.Assert.NotNull(model);
+            NUnit.Framework.Assert.AreEqual(calendarId, model.Id);
         }
 
         [Test]
@@ -285,7 +285,7 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Delete(null);
 
             // Assert
-            Assert.IsInstanceOf<NotFoundResult>(result);
+            NUnit.Framework.Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
         [Test]
@@ -302,7 +302,7 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.Delete(invalidId);
 
             // Assert
-            Assert.IsInstanceOf<NotFoundResult>(result);
+            NUnit.Framework.Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
         [Test]
@@ -318,11 +318,11 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.DeleteConfirmed(calendarId) as RedirectToActionResult;
 
             // Assert
-            Assert.NotNull(result);
-            Assert.AreEqual("Index", result.ActionName);
+            NUnit.Framework.Assert.NotNull(result);
+            NUnit.Framework.Assert.AreEqual("Index", result.ActionName);
 
             var deletedCalendar = await _dbContext.Calendar.FindAsync(calendarId);
-            Assert.Null(deletedCalendar);
+            NUnit.Framework.Assert.Null(deletedCalendar);
         }
 
         [Test]
@@ -333,7 +333,7 @@ namespace StudyFlow.Tests.Controllers
             var result = await _controller.DeleteConfirmed(invalidId);
 
             // Assert
-            Assert.IsInstanceOf<NotFoundResult>(result);
+            NUnit.Framework.Assert.IsInstanceOf<NotFoundResult>(result);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using StudyFlow.Models.Domain.Enumeration;
 using StudyFlow.Models.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace StudyFlow.Models.Domain
@@ -17,9 +18,11 @@ namespace StudyFlow.Models.Domain
         [Required]
         public Status? Status { get; set; }
         [Required]
+        [DisplayName("Created At")]
         public DateTime CreatedAt { get; set; }
         [Required]
         [AfterDate("CreatedAt", ErrorMessage = "Due Date must be after Created At.")]
+        [DisplayName("Due Date")]
         public DateTime DueDate { get; set; }
         public StudyFlowUser? User { get; set; }
     }
